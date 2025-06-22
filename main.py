@@ -4,11 +4,11 @@ from game.tictactoe import TicTacToe, Player
 if __name__ == "__main__":
 
     # you can change these if you like:
-    player_1_name = "1"  # any string (preferably len >= 1) you like
-    player_2_name = "2"  # any string (preferably len >= 1) you like
+    player_1_name = "mary"  # any string you like (preferably len >= 1)
+    player_2_name = "paul"  # any string you like (preferably len >= 1)
 
-    player_1_symbol = "x"  # any string (preferably len == 1) you like
-    player_2_symbol = "o"  # any string (preferably len == 1) you like
+    player_1_symbol = "x"  # any string you like (preferably len == 1)
+    player_2_symbol = "o"  # any string you like (preferably len == 1)
 
     game_board_size = (3,3)  # any tuple of length two with two identical integers
 

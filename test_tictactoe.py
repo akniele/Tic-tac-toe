@@ -2,29 +2,37 @@ import unittest
 from game.tictactoe import TicTacToe, Player
 
 
+"""
+In this file, a number of methods from the TicTacToe class are tested
+
+"""
+
 # function for setting up game and players, to avoid repeating these lines in each test case
 def set_up_game_and_players():
-    game = TicTacToe((3,3))
-    player_1 = Player("paul", "o", 1) 
-    player_2 = Player("mary", "x", -1)
 
-    game.add_player(player_1)
+    game = TicTacToe((3,3))                            # instantiate a game of tic-tac-toe with a 3x3 grid 
+    player_1 = Player("paul", "o", 1)                  # instantiate a player called "paul" with symbol "o"
+    player_2 = Player("mary", "x", -1)                 # instantiate a player called "mary" with symbol "x"
+
+    # add the players to the game
+    game.add_player(player_1)                         
     game.add_player(player_2)
 
     return game
 
 
 class TestTicTacToe(unittest.TestCase):
+
     def test_update_game_board(self):
 
         game = set_up_game_and_players()
 
-        game.update_game_board(2, 2, game.players[0])  
-        game.update_game_board(1, 1, game.players[1]) 
+        game.update_game_board(2, 2, game.players[0])  # updating the game board with a tile by player 1 in row 3, column 3
+        game.update_game_board(1, 1, game.players[1])  # updating the game board with a tile by player 2 in row 2, column 2
 
-        self.assertEqual(game.board[2, 2], 1.0)
-        self.assertEqual(game.board[1, 1], -1.0)
-        self.assertEqual(game.board[0, 0], 0.0)
+        self.assertEqual(game.board[2, 2], 1.0)        # assert statement checks if there is a tile by player 1 (with value 1.0) in row 3, column 3
+        self.assertEqual(game.board[1, 1], -1.0)       # assert statement checks if there is a tile by player 2 (with value -1.0) in row 2, column 2
+        self.assertEqual(game.board[0, 0], 0.0)        # sanity check: assert statement checks if the tile in row 1, column 1 has value 0.0 (default value)
 
 
     def test_get_current_score_continue(self):
@@ -68,6 +76,7 @@ class TestTicTacToe(unittest.TestCase):
 
 
     def test_get_current_score_done(self):
+
         game = set_up_game_and_players()
 
         """
@@ -107,7 +116,7 @@ class TestTicTacToe(unittest.TestCase):
         # Then reset game board
         game.reset_game_board()
 
-        self.assertEqual(game.board.sum(), 0.0)
+        self.assertEqual(game.board.sum(), 0.0)        # check if the sum of all tiles on the game board is 0.0 (as expected on an empty board)
 
 
 

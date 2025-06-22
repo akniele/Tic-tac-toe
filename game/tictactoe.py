@@ -1,6 +1,18 @@
 import numpy as np
 import pandas as pd
 
+"""
+In this file, the Player class and the TicTacToe class are defined. 
+
+A quick note on the game board as defined in the TicTacToe class: the datastructure used for this board is a NumPy array.
+This makes it easy to check if a player has won the game (by summing over the rows, columns, and diagonals).
+
+Player 1's tiles are represented as 1's on the game board, player 2's tiles as -1's, and empty tiles as 0's. 
+This means that if the sum of any row, column or diagonal is 3, player 1 has won, while if the sum is -3, player 2 has won.
+
+One could have also used a nested list instead of a NumPy array for this. 
+However, using the vectorized methods of NumPy arrays tends to be more time-efficient.
+"""
 
 class Player:
     def __init__(self, id, symbol, tile_value):
@@ -66,7 +78,7 @@ class TicTacToe:
         df_board = pd.DataFrame(self.board)  # get a pandas dataframe of the game board for printing to the terminal
         
         def noughts_and_crosses(x):
-            x = x.replace(0.0, "").replace(self.players[0].tile_value, self.players[0].symbol).replace(self.players[1].tile_value, self.players[1].symbol)  # replace 1's and -1's with the players' symbols
+            x = x.replace(0.0, " ").replace(self.players[0].tile_value, self.players[0].symbol).replace(self.players[1].tile_value, self.players[1].symbol)  # replace 1's and -1's with the players' symbols
             return x
 
         df_board = df_board.apply(noughts_and_crosses)
@@ -137,10 +149,10 @@ class TicTacToe:
             # check if one of the players has one, if there is a draw, or if the game can continue
             if result == "player 1 wins":
                 self.players[0].increase_player_score()
-                print("player 1 wins this round!")
+                print(f"player {self.players[0].id} wins this round!")
             elif result == "player 2 wins":
                 self.players[1].increase_player_score()
-                print("player 2 wins this round!")
+                print(f"player {self.players[1].id} wins this round!")
             elif result == "done":
                 print("There is a draw!")
             else:
@@ -158,8 +170,8 @@ class TicTacToe:
             if new_game == "n":
                 final_state = True
                 print("Well played!")
-                print(f"Final score Player 1: {self.players[0].score}")
-                print(f"Final score Player 2: {self.players[1].score}")
+                print(f"Final score Player {self.players[0].id}: {self.players[0].score}")
+                print(f"Final score Player {self.players[1].id}: {self.players[1].score}")
 
             elif new_game == "y":
                 self.reset_game_board()
